@@ -116,6 +116,10 @@ Las siguientes funcionalidades necesitan ser desarrolladas:
 1. **Actualizar Foto del Usuario**
    - Descripción: Implementar funcionalidad para actualizar la foto de perfil del usuario.
 
+    Realice el intento de completar esta funcion de actualizar profilepicture.
+    mediante una function donde por mediante el ID del usuario cambie la foto
+    actual del mismo usuario que estas buscando
+
 2. **Listar Citas**
    - Descripción: Implementar funcionalidad para listar todas las citas de un usuario.
 
