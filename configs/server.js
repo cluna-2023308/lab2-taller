@@ -32,7 +32,6 @@ const conectarDB = async () =>{
         await dbConnection()
     }catch(err){
         console.log(`Database connection failed: ${err}`)
-        process.exit(1)
     }
 }
 

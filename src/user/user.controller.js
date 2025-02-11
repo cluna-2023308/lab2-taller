@@ -1,5 +1,10 @@
 import { hash, verify  } from "argon2";
 import User from "./user.model.js"
+import fs from "fs/promises";
+import { dirname, join } from "path";
+import { fileURLToPath } from "url";
+
+const __dirname = dirname(fileURLToPath(import.meta.url))
 
 export const getUserById = async (req, res) => {
     try{
@@ -110,22 +115,28 @@ export const updatePassword = async (req, res) => {
 export const updateProfilePicture = async (req, res) => {
     try{
         const { uid } = req.params
-        let { newProfilePicture } = req.file ? req.file.filename : null;
+        let newProfilePicture = req.file ? req.file.filename : null;
 
-        const user = await User.findById(uid)
-
-        const matchOldAndNewProfilePicture = await verify(user.profilePicture, newProfilePicture)
-
-        if(matchOldAndNewProfilePicture){
+        if(!newProfilePicture){
             return res.status(400).json({
-                success: false,
-                message: "La nueva foto de perfil no puede ser igual a la anterior"
+                sucess: false,
+                message: "No hay archivo en la peticion"
             })
         }
+        const user = await User.findById(uid)
+
+        if(user.profilePicture){
+            const oldProfilePicture = join(__dirname, "../../public/uploads/profile-pictures", user.profilePicture)
+            await fs.unlink(oldProfilePicture)
+        }
+        
+        user.profilePicture = newProfilePicture
+        await user.save()
 
         return res.status(200).json({
-            success: true,
-            mesage: "Foto de perfil actualizada"
+            sucess: true,
+            message: "Foto actualizada",
+            profilePicture: user.profilePicture
         })
 
     }catch(err){

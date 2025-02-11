@@ -1,5 +1,6 @@
 import Pet from "../pet/pet.model.js";
 import Appointment from "../appointment/appointment.model.js";
+import User from "../user/user.model.js"
 import { parse } from "date-fns";
 
 export const saveAppointment = async (req, res) => {
@@ -57,36 +58,87 @@ export const saveAppointment = async (req, res) => {
   }
 }
 
-export const getAppointment = async (req, res) => {
-    const { limite = 10, desde = 0 } = req.query;
-    const query = { status: true };
-    const { uid } = req.params
+export const listAppointmentUser = async (req, res) => {
+  try {
+      const { uid } = req.params;
 
-    try {
-        const appointment = await Pet.find(query)
-            .skip(Number(desde))
-            .limit(Number(limite));
+      if (!uid) {
+          return res.status(400).json({
+              success: false,
+              message: "El ID del usuario es obligatorio"
+          });
+      }
 
-        const appointmentWithOwnerNames = await Promise.all(pets.map(async (appointment) => {
-            const owner = await User.findById(appointment.keeper);
-            return {
-                ...pet.toObject(),
-                keeper: owner ? owner.nombre : "Propietario no encontrado",
-            };
-        }));
+      const user = await User.findById(uid);
+      if (!user) {
+          return res.status(404).json({
+              success: false,
+              message: "Usuario no encontrado"
+          });
+      }
 
-        const total = await Pet.countDocuments(query);
+      const appointments = await Appointment.find({ user: uid })
+          .populate("pet", "name")
+          .populate("user", "name email");
 
-        res.status(200).json({
-            success: true,
-            total,
-            appointment: appointmentWithOwnerNames,
-        });
-    } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: 'Error al obtener las citas',
-            error
-        });
-    }
+      return res.status(200).json({
+          success: true,
+          appointments
+      });
+  } catch (err) {
+      return res.status(500).json({
+          success: false,
+          message: "Error al obtener las citas",
+          error: err.message
+      });
+  }
+};
+
+export const updateAppointment = async (req, res) => {
+  try {
+      const { appointmentId } = req.params;
+      const  data  = req.body;
+ 
+      const appointment = await Appointment.findByIdAndUpdate(appointmentId, data, { new: true });
+ 
+      res.status(200).json({
+          success: true,
+          msg: 'Cita Actualizada correctamente',
+          appointment,
+      });
+  } catch (err) {
+      res.status(500).json({
+          success: false,
+          msg: 'Error al actualizar la cita',
+          error: err.message
+      });
+  }
 }
+
+export const cancelAppointment = async (req, res) => {
+  try {
+      const { appointmentId } = req.params;
+
+      const appointment = await Appointment.findById(appointmentId);
+      if (!appointment) {
+          return res.status(404).json({
+              success: false,
+              message: "Cita no encontrada"
+          });
+      }
+      appointment.status = "CANCELLED";
+      await appointment.save();
+
+      return res.status(200).json({
+          success: true,
+          message: "Cita cancelada exitosamente",
+          appointment
+      });
+  } catch (err) {
+      return res.status(500).json({
+          success: false,
+          message: "Error al cancelar la cita",
+          error: err.message
+      });
+  }
+};

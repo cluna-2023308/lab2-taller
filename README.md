@@ -116,15 +116,45 @@ Las siguientes funcionalidades necesitan ser desarrolladas:
 1. **Actualizar Foto del Usuario**
    - Descripción: Implementar funcionalidad para actualizar la foto de perfil del usuario.
 
-    Realice el intento de completar esta funcion de actualizar profilepicture.
-    mediante una function donde por mediante el ID del usuario cambie la foto
-    actual del mismo usuario que estas buscando
+  Funcion: 
+  - USER
+    Metodo: PATCH
+    URL: http://127.0.0.1:3001/adoptionSystem/v1/user/updateProfilePicture/:uid
+    body: Form-data
+    ```json
+    {
+			"key": "profilePicture",
+			"type": "file",
+			"src": "postman-cloud:///1ef4dc1f-9b79-4680-a529-ea114dc8ffeb"
+		}
 
 2. **Listar Citas**
    - Descripción: Implementar funcionalidad para listar todas las citas de un usuario.
 
+   Funcion:
+   - APPOINTMENT
+     Metodo: GET
+     URL: http://127.0.0.1:3001/adoptionSystem/v1/appointment/listAppointmentUser/:uid
+
+     le solicita el ID del usuario para que la funcion pueda obtener las citas creadas con ese ID que proporciono
+     en la ruta  
+
 3. **Actualizar Cita**
    - Descripción: Implementar funcionalidad para actualizar una cita existente.
 
+   Funcion:
+   - APPOINTMENT
+     Metodo: PUT
+     URL: http://127.0.0.1:3001/adoptionSystem/v1/appointment/updateAppointment/:appointmentId
+
+     le solicita el ID de la cita a la que desea que se le realicen actualizaciones en sus campos
+
 4. **Cancelar Cita**
    - Descripción: Implementar funcionalidad para cancelar una cita existente.
+
+   Funcion: 
+   - APPOINTMENT
+     Metodo: DELETE
+     URL: http://127.0.0.1:3001/adoptionSystem/v1/appointment/cancelAppointment/:appointmentId
+
+     le solicita el ID de la cita a la que desea que le cambie el status a CANCELLED

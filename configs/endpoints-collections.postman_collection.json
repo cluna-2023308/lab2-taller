@@ -19,32 +19,32 @@
 							"formdata": [
 								{
 									"key": "name",
-									"value": "Joséss",
+									"value": "Cristian",
 									"type": "text"
 								},
 								{
 									"key": "surname",
-									"value": "Balenciagass",
+									"value": "Luna",
 									"type": "text"
 								},
 								{
 									"key": "username",
-									"value": "jbalenciaga3",
+									"value": "cluna-2023308",
 									"type": "text"
 								},
 								{
 									"key": "email",
-									"value": "jbalenciaga3@gmail.es",
+									"value": "cluna-2023308@kinal.edu.gt",
 									"type": "text"
 								},
 								{
 									"key": "phone",
-									"value": "22160098",
+									"value": "12345678",
 									"type": "text"
 								},
 								{
 									"key": "password",
-									"value": "1234",
+									"value": "Messi10-",
 									"type": "text"
 								},
 								{
@@ -67,53 +67,18 @@
 					"name": "Login",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+						],
 						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "name",
-									"value": "Joséss",
-									"type": "text"
-								},
-								{
-									"key": "surname",
-									"value": "Balenciagass",
-									"type": "text"
-								},
-								{
-									"key": "username",
-									"value": "jbalenciaga3",
-									"type": "text"
-								},
-								{
-									"key": "email",
-									"value": "jbalenciaga3@gmail.es",
-									"type": "text"
-								},
-								{
-									"key": "phone",
-									"value": "22160098",
-									"type": "text"
-								},
-								{
-									"key": "password",
-									"value": "1234",
-									"type": "text"
-								},
-								{
-									"key": "role",
-									"value": "ADMIN_ROLE",
-									"type": "text"
-								},
-								{
-									"key": "profilePicture",
-									"type": "file",
-									"src": "postman-cloud:///1ef4dc1f-9b79-4680-a529-ea114dc8ffeb"
-								}
-							]
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"cluna-2023308@kinal.edu.gt\",\n  \"password\": \"Messi10-\"\n}"
 						},
-						"url": "http://127.0.0.1:3001/adoptionSystem/v1/auth/register"
+						"url": "http://127.0.0.1:3001/adoptionSystem/v1/auth/login"
 					},
 					"response": []
 				}
@@ -126,7 +91,8 @@
 					"name": "Buscar un usuario por ID",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [], 
+						"url": "http://127.0.0.1:3001/adoptionSystem/v1/user/findUser/679cedc00c50f098afb74105"
 					},
 					"response": []
 				},
@@ -135,7 +101,7 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"url": "http://127.0.0.1:3001/adoptionSystem/v1/user/findUser/679cedc00c50f098afb74105"
+						"url": "http://127.0.0.1:3001/adoptionSystem/v1/user/deleteUser/679cedc00c50f098afb74105"
 					},
 					"response": []
 				},
@@ -143,7 +109,8 @@
 					"name": "Listar Usuarios",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": "http://127.0.0.1:3001/adoptionSystem/v1/user/"
 					},
 					"response": []
 				},
@@ -151,17 +118,37 @@
 					"name": "Actualizar contraseña",
 					"request": {
 						"method": "PATCH",
-						"header": [],
+						"header": [
+							{
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"newPassword\":\"12345678\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": "{\n  \"newPassword\": \"Lamine-yamal19\"\n}"
 						},
 						"url": "http://127.0.0.1:3001/adoptionSystem/v1/user/updatePassword/679cef6b0a9ac952c4552d76"
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar foto de perfil",
+					"request":{
+						"method": "PATCH",
+						"header": [],
+							"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "profilePicture",
+									"type": "file",
+									"src": "postman-cloud:///1ef4dc1f-9b79-4680-a529-ea114dc8ffeb"
+								}
+							]
+						},
+						"url": "http://127.0.0.1:3001/adoptionSystem/v1/user/updateProfilePicture/679cef6b0a9ac952c4552d76"
 					},
 					"response": []
 				},
@@ -175,22 +162,22 @@
 							"formdata": [
 								{
 									"key": "name",
-									"value": "Joséss",
+									"value": "Randy",
 									"type": "text"
 								},
 								{
 									"key": "surname",
-									"value": "Balenciagass",
+									"value": "Oscal",
 									"type": "text"
 								},
 								{
 									"key": "username",
-									"value": "jbalenciaga3",
+									"value": "roscal-2023111",
 									"type": "text"
 								},
 								{
 									"key": "email",
-									"value": "jbalenciaga3@gmail.es",
+									"value": "roscal-2023111@kinal.edu.gt",
 									"type": "text"
 								},
 								{
@@ -200,7 +187,7 @@
 								},
 								{
 									"key": "password",
-									"value": "1234",
+									"value": "Neymar11-",
 									"type": "text"
 								},
 								{
@@ -215,7 +202,7 @@
 								}
 							]
 						},
-						"url": "http://127.0.0.1:3001/adoptionSystem/v1/user/updateUser"
+						"url": "http://127.0.0.1:3001/adoptionSystem/v1/user/updateUser/679cedc00c50f098afb74105"
 					},
 					"response": []
 				}
@@ -246,7 +233,8 @@
 					"name": "Listar mascotas",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": "http://127.0.0.1:3001/adoptionSystem/v1/pet/"
 					},
 					"response": []
 				},
@@ -254,53 +242,37 @@
 					"name": "Agregar mascota",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+						],
 						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "name",
-									"value": "Joséss",
-									"type": "text"
-								},
-								{
-									"key": "surname",
-									"value": "Balenciagass",
-									"type": "text"
-								},
-								{
-									"key": "username",
-									"value": "jbalenciaga3",
-									"type": "text"
-								},
-								{
-									"key": "email",
-									"value": "jbalenciaga3@gmail.es",
-									"type": "text"
-								},
-								{
-									"key": "phone",
-									"value": "22160098",
-									"type": "text"
-								},
-								{
-									"key": "password",
-									"value": "1234",
-									"type": "text"
-								},
-								{
-									"key": "role",
-									"value": "ADMIN_ROLE",
-									"type": "text"
-								},
-								{
-									"key": "profilePicture",
-									"type": "file",
-									"src": "postman-cloud:///1ef4dc1f-9b79-4680-a529-ea114dc8ffeb"
-								}
-							]
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Rayo\",\n \"description\": \"Es un perro de raza husky\",\n \"age\": \"10\",\n \"type\": \"perro\",\n \"keeper\": \"679cedc00c50f098afb74105\"\n}"
 						},
-						"url": "http://127.0.0.1:3001/adoptionSystem/v1/auth/register"
+						"url": "http://127.0.0.1:3001/adoptionSystem/v1/pet/addPet"
+					},
+					"response": []
+				},
+				{
+					"name": "Editar mascota",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Batman\",\n \"description\": \"Es un perro de raza rottweiler\",\n \"age\": \"11\",\n \"type\": \"perro\",\n \"email\": \"679cedc00c50f098afb74105\"\n}"
+						},
+						"url": "http://127.0.0.1:3001/adoptionSystem/v1/pet/updatePet/679cedc00c50f098afb74105"
 					},
 					"response": []
 				}
@@ -313,7 +285,55 @@
 					"name": "Agregar una cita",
 					"request": {
 						"method": "POST",
-						"header": []
+						"header": [
+							{
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"date\": \"2023-10-15T14:48:00.000Z\",\n \"status\": \"CREATED\",\n \"pet\": \"679cedc00c50f098afb74105\",\n \"user\": \"679cedc00c50f098afb74105\"\n}"
+						},
+						"url": "http://127.0.0.1:3001/adoptionSystem/v1/appointment/createAppointment"
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar citar por ID de usuario",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://127.0.0.1:3001/adoptionSystem/v1/appointment/listAppointmentUser/67a12b26af19e9044c8341da"
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar una cita",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"date\": \"2025-11-13T11:23:00.000Z\",\n \"status\": \"CREATED\",\n \"pet\": \"679cedc00c50f098afb74105\",\n \"user\": \"679cedc00c50f098afb74105\"\n}"
+						},
+						"url": "http://127.0.0.1:3001/adoptionSystem/v1/appointment/updateAppointment/679cedc00c50f098afb74105"
+					},
+					"response": []
+				},
+				{
+					"name": "Cancelar cita",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://127.0.0.1:3001/adoptionSystem/v1/appointment/cancelAppointment/679cedc00c50f098afb74105"
 					},
 					"response": []
 				}
