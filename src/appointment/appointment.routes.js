@@ -4,7 +4,6 @@ import { createAppointmentValidator, updateAppointmentValidator, deleteAppointme
 import { getUserByIdValidator } from "../middlewares/user-validators.js";
  
 const router = Router();
- 
 router.post("/createAppointment", createAppointmentValidator, saveAppointment);
 router.get("/listAppointmentUser/:uid", getUserByIdValidator, listAppointmentUser);
 router.put("/updateAppointment/:appointmentId", updateAppointmentValidator, updateAppointment);

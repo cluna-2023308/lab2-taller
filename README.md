@@ -118,8 +118,11 @@ Las siguientes funcionalidades necesitan ser desarrolladas:
 
   Funcion: 
   - USER
+
     Metodo: PATCH
+
     URL: http://127.0.0.1:3001/adoptionSystem/v1/user/updateProfilePicture/:uid
+
     body: Form-data
     ```json
     {
@@ -133,7 +136,9 @@ Las siguientes funcionalidades necesitan ser desarrolladas:
 
    Funcion:
    - APPOINTMENT
+
      Metodo: GET
+
      URL: http://127.0.0.1:3001/adoptionSystem/v1/appointment/listAppointmentUser/:uid
 
      le solicita el ID del usuario para que la funcion pueda obtener las citas creadas con ese ID que proporciono
@@ -144,7 +149,9 @@ Las siguientes funcionalidades necesitan ser desarrolladas:
 
    Funcion:
    - APPOINTMENT
+
      Metodo: PUT
+
      URL: http://127.0.0.1:3001/adoptionSystem/v1/appointment/updateAppointment/:appointmentId
 
      le solicita el ID de la cita a la que desea que se le realicen actualizaciones en sus campos
@@ -154,7 +161,9 @@ Las siguientes funcionalidades necesitan ser desarrolladas:
 
    Funcion: 
    - APPOINTMENT
+
      Metodo: DELETE
+     
      URL: http://127.0.0.1:3001/adoptionSystem/v1/appointment/cancelAppointment/:appointmentId
 
      le solicita el ID de la cita a la que desea que le cambie el status a CANCELLED

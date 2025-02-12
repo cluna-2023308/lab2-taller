@@ -5,10 +5,9 @@ import { parse } from "date-fns";
 
 export const saveAppointment = async (req, res) => {
   try {
-    const { date, pet } = req.body;
-    const { usuario } = req;
+    const data = req.body;
 
-    const isoDate = new Date(date);
+    const isoDate = new Date(data.date);
 
     if (isNaN(isoDate.getTime())) {
       return res.status(400).json({
@@ -17,9 +16,8 @@ export const saveAppointment = async (req, res) => {
       });
     }
 
-    const petRecord = await Pet.findOne({ _id: pet });
-
-    if (!petRecord) {
+    const pet = await Pet.findOne({ _id: data.pet });
+    if (!pet) {
       return res.status(404).json({ 
         success: false, 
         msg: "No se encontró la mascota" 
@@ -27,8 +25,8 @@ export const saveAppointment = async (req, res) => {
     }
 
     const existAppointment = await Appointment.findOne({
-      pet,
-      user: usuario.uid,
+      pet: data.pet,
+      user: data.user,
       date: {
         $gte: new Date(isoDate).setHours(0, 0, 0, 0),
         $lt: new Date(isoDate).setHours(23, 59, 59, 999),
@@ -42,29 +40,23 @@ export const saveAppointment = async (req, res) => {
       });
     }
 
-    if (!usuario || !usuario.uid) {
-      return res.status(401).json({
-        success: false,
-        msg: "Usuario no autenticado",
-      });
-    }    
-
-    const appointment = new Appointment({ date: isoDate, pet, user: usuario.uid});
+    const appointment = new Appointment({ ...data, date: isoDate });
     await appointment.save();
 
     return res.status(200).json({
       success: true,
-      msg: `Cita creada exitosamente en fecha ${date}`,
+      msg: `Cita creada exitosamente en fecha ${data.date}`,
     });
     
   } catch (error) {
+    console.error(error);
     return res.status(500).json({ 
       success: false, 
       msg: "Error al crear la cita", 
-      error: error.message 
+      error 
     });
   }
-};
+}
 
 export const listAppointmentUser = async (req, res) => {
   try {
